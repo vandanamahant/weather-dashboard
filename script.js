@@ -1,6 +1,3 @@
-const apiKey = typeof CONFIG !== 'undefined' ? CONFIG.WEATHER_API_KEY : "";
-const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
-
 const cityInput = document.getElementById("cityInput");
 const searchBtn = document.getElementById("searchBtn");
 
@@ -15,7 +12,8 @@ const error = document.getElementById("error");
 async function getWeather(city) {
     try {
         error.textContent = "";
-        const response = await fetch(`${apiUrl}${city}&appid=${apiKey}`);
+        
+        const response = await fetch(`/api/weather?city=${encodeURIComponent(city)}`);
 
         if (!response.ok) {
             throw new Error("City not found");
@@ -29,7 +27,6 @@ async function getWeather(city) {
         humidity.textContent = `${data.main.humidity}%`;
         wind.textContent = `${data.wind.speed} km/h`;
         
-        // Show weather icon safely
         weatherIcon.style.display = "block";
         weatherIcon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png`;
 
@@ -41,7 +38,6 @@ async function getWeather(city) {
         humidity.textContent = "--%";
         wind.textContent = "-- km/h";
         
-        // Hide broken image placeholder on error
         weatherIcon.style.display = "none";
         weatherIcon.src = "";
     }
