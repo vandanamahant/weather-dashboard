@@ -1,4 +1,4 @@
-const apiKey = CONFIG.WEATHER_API_KEY;
+const apiKey = typeof CONFIG !== 'undefined' ? CONFIG.WEATHER_API_KEY : "VERCEL_ENV_KEY";
 const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
 
 const cityInput = document.getElementById("cityInput");
