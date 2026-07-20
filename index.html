@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="weather-card">
+            <h1>Weather Dashboard</h1>
+            
+            <div class="search-box">
+                <input type="text" id="cityInput" placeholder="Enter city name">
+                <button id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+
+            <p id="error" class="error"></p>
+
+            <div id="weatherData">
+                <img id="weatherIcon" src="" alt="Weather Icon">
+                <h2 id="cityName">London</h2>
+                <h3 id="temperature">--°C</h3>
+                <p id="condition">Weather Condition</p>
+
+                <div class="details">
+                    <div class="detail-box">
+                        <i class="fa-solid fa-droplet"></i>
+                        <div>
+                            <h4>Humidity</h4>
+                            <p id="humidity">--%</p>
+                        </div>
+                    </div>
+                    <div class="detail-box">
+                        <i class="fa-solid fa-wind"></i>
+                        <div>
+                            <h4>Wind Speed</h4>
+                            <p id="wind">-- km/h</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
