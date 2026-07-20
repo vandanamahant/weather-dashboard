@@ -1,4 +1,4 @@
-const apiKey = typeof CONFIG !== 'undefined' ? CONFIG.WEATHER_API_KEY : "VERCEL_ENV_KEY";
+const apiKey = (typeof CONFIG !== 'undefined' && CONFIG.WEATHER_API_KEY) ? CONFIG.WEATHER_API_KEY : (window.ENV ? window.ENV.WEATHER_API_KEY : "");
 const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
 
 const cityInput = document.getElementById("cityInput");
@@ -14,6 +14,7 @@ const error = document.getElementById("error");
 
 async function getWeather(city) {
     try {
+        error.textContent = "";
         const response = await fetch(`${apiUrl}${city}&appid=${apiKey}`);
 
         if (!response.ok) {
@@ -27,8 +28,9 @@ async function getWeather(city) {
         condition.textContent = data.weather[0].main;
         humidity.textContent = `${data.main.humidity}%`;
         wind.textContent = `${data.wind.speed} km/h`;
+        
+        weatherIcon.style.display = "block";
         weatherIcon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png`;
-        error.textContent = "";
 
     } catch (err) {
         error.textContent = "City not found. Please try again.";
@@ -37,6 +39,8 @@ async function getWeather(city) {
         condition.textContent = "--";
         humidity.textContent = "--%";
         wind.textContent = "-- km/h";
+        
+        weatherIcon.style.display = "none";
         weatherIcon.src = "";
     }
 }
@@ -52,5 +56,3 @@ cityInput.addEventListener("keypress", (event) => {
         if (city) getWeather(city);
     }
 });
-
-getWeather("London");
